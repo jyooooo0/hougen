@@ -20,15 +20,15 @@ def verify_geojson():
         
         print(f"Unique Municipality Names: {len(names)}")
         sorted_names = sorted(list(names))
-        # Print repr to avoid encoding errors in console
-        print([n for n in sorted_names]) 
-        # Actually printing the list directly might still try to encode elements if not using repr?
-        # Python's list __repr__ calls repr() on items, so it should be safe? 
-        # No, str items in a list are printed as is in some shells?
-        # Let's explicitly ascii-safe it for the console log
+        # Print names safely
         print("Names (safe view):")
         for n in sorted_names:
-            print(n.encode('utf-8', 'replace').decode('utf-8', 'replace') if os.name != 'nt' else n.encode('cp932', 'replace').decode('cp932', 'replace'))
+            print(ascii(n))
+            # Also try to print normally but handle error
+            try:
+                print(n)
+            except UnicodeEncodeError:
+                print(f"  (Cannot print {ascii(n)} in current console encoding)")
         
         # Check for mojibake or replacement chars
         mojibake_count = 0

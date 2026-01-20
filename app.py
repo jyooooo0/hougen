@@ -832,7 +832,7 @@ def main():
             ))
 
             fig_scatter.update_layout(height=600)
-            st.plotly_chart(fig_scatter, use_container_width=True)
+            st.plotly_chart(fig_scatter, use_container_width=True, config={'displayModeBar': False})
     else:
         st.info("表示するデータがありません")
 
@@ -857,6 +857,11 @@ def main():
         
         # 件数で降順ソート
         distribution = distribution.sort_values("Count", ascending=False)
+        
+        # 【デバッグ用】データ件数の確認
+        if not distribution.empty:
+            max_count = distribution.iloc[0]['Count']
+            st.caption(f"DEBUG info: Top Answer Count = {max_count}")
         
         col1, col2 = st.columns([1, 1])
         
@@ -902,35 +907,59 @@ def main():
                 plot_bgcolor="rgba(0,0,0,0)",
                 font=dict(color="#f0f0f5"),
             )
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, use_container_width=True, config={'displayModeBar': False})
         
         with col2:
             # --- 棒グラフ (graph_objectsを使用) ---
-            bar_data = distribution.head(15)
+            bar_data = distribution.head(15).copy()
             # グラフ上は見やすいように下から積み上げる形にする（降順データの逆順）
             bar_data_rev = bar_data.iloc[::-1]
             
+            # Pandas Seriesをリストに変換（Plotlyの互換性向上のため）
+            bar_x_values = bar_data_rev["Count"].astype(int).tolist()
+            bar_y_values = bar_data_rev["Answer"].tolist()
+            
+            # 最大値を計算してX軸の範囲を設定
+            max_value = max(bar_x_values) if bar_x_values else 0
+            
             fig_bar = go.Figure(data=[go.Bar(
-                x=bar_data_rev["Count"],
-                y=bar_data_rev["Answer"],
+                x=bar_x_values,
+                y=bar_y_values,
                 orientation='h',
                 marker=dict(
-                    color=bar_data_rev["Count"],
+                    color=bar_x_values,
                     colorscale=["#FFB3B3", "#C41E3A"]
-                )
+                ),
+                text=bar_x_values,
+                texttemplate='%{x}',  # 【重要】X軸の値（件数）を直接表示
+                textposition='outside',
+                textfont=dict(color="#f0f0f5", size=14, family="Arial Black"),
+                cliponaxis=False
             )])
             
             fig_bar.update_layout(
-                title="回答の件数（上位15件）",
+                title=dict(text="回答の件数（上位15件）", font=dict(size=16)),
                 showlegend=False,
-                margin=dict(t=50, b=20, l=20, r=20),
+                margin=dict(t=50, b=20, l=10, r=80),  # 右マージンを十分に確保
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
                 font=dict(color="#f0f0f5"),
-                xaxis=dict(title="件数"),
-                yaxis=dict(title="回答")
+                xaxis=dict(
+                    title="件数",
+                    range=[0, max_value * 1.25],  # 最大値の1.25倍まで表示（ラベルスペース確保）
+                    tickformat='d',
+                    dtick=max(1, max_value // 5),
+                    fixedrange=True, # ズーム禁止（誤操作防止）
+                ),
+                yaxis=dict(
+                    title="",
+                    fixedrange=True, # ズーム禁止
+                ),
+                uniformtext_minsize=10,
+                uniformtext_mode='show' # 常に表示
             )
-            st.plotly_chart(fig_bar, use_container_width=True)
+            # fig_bar.update_traces(textposition='outside', cliponaxis=False) # 上記で設定済みのため削除
+            st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
     
     st.markdown("---")
     
@@ -1003,7 +1032,7 @@ def main():
                 font=dict(color="#f0f0f5"),
             )
             
-            st.plotly_chart(fig_stack, use_container_width=True)
+            st.plotly_chart(fig_stack, use_container_width=True, config={'displayModeBar': False})
         else:
             st.warning(f"{selected_region}地方のデータがありません")
     
