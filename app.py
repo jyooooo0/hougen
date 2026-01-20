@@ -768,16 +768,19 @@ def main():
                         html=f"""
                             <div style="
                                 font-family: 'Noto Sans JP', sans-serif;
-                                font-size: 8pt;
-                                font-weight: bold;
+                                font-size: 7pt;
+                                font-weight: 500;
                                 color: white;
-                                text-shadow: 1.5px 0 0 #333, -1.5px 0 0 #333, 0 1.5px 0 #333, 0 -1.5px 0 #333;
+                                background-color: rgba(0, 0, 0, 0.4);
+                                padding: 2px 4px;
+                                border-radius: 4px;
                                 white-space: normal;
-                                max-width: 80px;
-                                line-height: 1.1;
+                                max-width: 120px;
+                                line-height: 1.2;
                                 text-align: center;
                                 transform: translate(-50%, -50%);
                                 pointer-events: none;
+                                box-shadow: 0 0 2px rgba(0,0,0,0.2);
                             ">
                                 {top_ans}
                             </div>
