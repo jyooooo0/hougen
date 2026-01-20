@@ -182,6 +182,7 @@ def get_question_distribution(df: pd.DataFrame, question_key: str) -> pd.DataFra
     # 分布を計算
     distribution = pd.Series(answers).value_counts().reset_index()
     distribution.columns = ["回答", "件数"]
+    distribution = distribution.sort_values("件数", ascending=False)
     
     return distribution
 

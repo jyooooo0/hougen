@@ -868,6 +868,10 @@ def main():
                     pd.DataFrame({"回答": ["その他"], "件数": [others_count]})
                 ], ignore_index=True)
             
+            # 【デバッグ用】（折りたたみ表示）
+            with st.expander("詳細データを見る"):
+                st.dataframe(top_dist)
+
             fig_pie = px.pie(
                 top_dist,
                 values="件数",
