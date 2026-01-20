@@ -12,6 +12,7 @@ import requests
 import folium
 from streamlit_folium import st_folium
 from branca.element import MacroElement, Template, Element
+from shapely.geometry import shape
 import json
 import math
 from data_processor import (
@@ -731,13 +732,35 @@ def main():
 
             # 5. ラベル（市町村名＋最多回答）を追加
             # DivIconを使用して文字のみを表示
-            for _, row in df_map_viz.iterrows():
-                lat, lon = row['緯度'], row['経度']
-                top_ans = row['最も多い方言']
+            # GeoJSONから重心を計算して配置
+            for feature in geojson['features']:
+                props = feature['properties']
+                city_name = props.get('N03_004')
                 
-                if pd.isna(lat) or pd.isna(lon) or not top_ans:
+                # 表示すべきデータがあるか確認
+                if not city_name:
                     continue
-                
+                    
+                # マップデータから回答を取得
+                row = df_map_viz[df_map_viz['市町村'] == city_name]
+                if row.empty:
+                    continue
+                    
+                top_ans = row.iloc[0]['最も多い方言']
+                if not top_ans:
+                    continue
+
+                # 重心（または代表点）の計算
+                try:
+                    polygon = shape(feature['geometry'])
+                    # representative_point() はポリゴン内部にあることが保証される
+                    # centroid は形によってはポリゴン外になることがある（三日月型など）
+                    center = polygon.representative_point()
+                    lat, lon = center.y, center.x
+                except Exception as e:
+                    # 計算失敗時はフォールバック
+                    lat, lon = row.iloc[0]['緯度'], row.iloc[0]['経度']
+
                 # 文字ラベルのマーカーを追加
                 folium.map.Marker(
                     [lat, lon],
