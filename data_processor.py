@@ -145,7 +145,7 @@ def normalize_dialect_term(text: str, question_key: str) -> str:
     return text
 
 
-@st.cache_data
+# @st.cache_data
 def get_normalized_answers(df: pd.DataFrame, col_name: str, question_key: str) -> list:
     """
     指定されたカラムの回答を分割・正規化してフラットなリストとして返す
@@ -164,7 +164,7 @@ def get_normalized_answers(df: pd.DataFrame, col_name: str, question_key: str) -
     return all_answers
 
 
-@st.cache_data
+# @st.cache_data
 def get_question_distribution(df: pd.DataFrame, question_key: str) -> pd.DataFrame:
     """
     特定の設問の回答分布を取得（分割・正規化済み）
@@ -187,7 +187,7 @@ def get_question_distribution(df: pd.DataFrame, question_key: str) -> pd.DataFra
     return distribution
 
 
-@st.cache_data
+# @st.cache_data
 def get_municipality_distribution(df: pd.DataFrame, question_key: str) -> pd.DataFrame:
     """
     市町村ごとの設問回答分布を取得（分割・正規化済み）
