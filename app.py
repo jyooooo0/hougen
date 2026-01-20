@@ -705,6 +705,15 @@ def main():
                     'opacity': 0.8
                 }
             
+            def highlight_function(feature):
+                return {
+                    'fillColor': '#4ecdc4',  # ハイライト時はティール色
+                    'color': '#ffffff',
+                    'weight': 3,
+                    'fillOpacity': 0.95,
+                    'opacity': 1.0
+                }
+            
             # 単一のGeoJsonレイヤーとして追加
             folium.GeoJson(
                 data=geojson,
