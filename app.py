@@ -880,9 +880,13 @@ def main():
             
             import plotly.graph_objects as go
             
+            # Pandas Seriesをリストに変換（Plotlyの互換性向上のため）
+            pie_labels = top_dist["Answer"].tolist()
+            pie_values = top_dist["Count"].astype(int).tolist()
+            
             fig_pie = go.Figure(data=[go.Pie(
-                labels=top_dist["Answer"],
-                values=top_dist["Count"],
+                labels=pie_labels,
+                values=pie_values,
                 hole=0.3,
                 marker=dict(colors=YAMAGATA_COLORS),
                 textinfo='percent+label',
