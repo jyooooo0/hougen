@@ -951,7 +951,7 @@ def main():
             cross_tab = cross_tab.loc[cross_tab.sum(axis=1).sort_values(ascending=True).index]
             
             # 上位回答のみを表示（色分けの複雑さを避けるため）
-            top_answers = distribution.head(10)["回答"].tolist()
+            top_answers = distribution.head(10)["Answer"].tolist()
             
             # データを整形
             plot_data = []
