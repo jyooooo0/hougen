@@ -862,20 +862,27 @@ def main():
             top_dist = distribution.head(top_n).copy()
             others_count = distribution.iloc[top_n:]["件数"].sum() if len(distribution) > top_n else 0
             
+            # その他を追加
             if others_count > 0:
                 top_dist = pd.concat([
                     top_dist,
                     pd.DataFrame({"回答": ["その他"], "件数": [others_count]})
                 ], ignore_index=True)
             
+            # 【重要】型変換とカラム名変更（Plotlyの挙動安定化のため）
+            top_dist["件数"] = pd.to_numeric(top_dist["件数"], errors='coerce')
+            top_dist = top_dist.rename(columns={"回答": "Answer", "件数": "Count"})
+
             # 【デバッグ用】（折りたたみ表示）
             with st.expander("詳細データを見る"):
+                st.write("データ型:")
+                st.write(top_dist.dtypes)
                 st.dataframe(top_dist)
 
             fig_pie = px.pie(
                 top_dist,
-                values="件数",
-                names="回答",
+                values="Count",
+                names="Answer",
                 title="回答の割合（上位8件 + その他）",
                 color_discrete_sequence=YAMAGATA_COLORS,
                 hole=0.3,
