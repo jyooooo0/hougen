@@ -428,9 +428,9 @@ YAMAGATA_COLORS = [
 # ======================================
 # データ読み込み（キャッシュ）
 # ======================================
-# @st.cache_data(ttl=3600)  <-- キャッシュ無効化（スマホ同期問題調査のため）
+@st.cache_data(ttl=3600)
 def get_data():
-    """データの読み込み（キャッシュ無効化中）"""
+    """データの読み込みとキャッシュ"""
     return load_data()
 
 # ======================================
@@ -449,8 +449,6 @@ def main():
     try:
         with st.spinner("データを読み込んでいます..."):
             df = get_data()
-            # 【デバッグ用】全データ件数の表示
-            st.caption(f"DEBUG info: Total Records Loaded = {len(df)}")
     except Exception as e:
         st.error(f"""
         ⚠️ **データの読み込みに失敗しました**
@@ -859,11 +857,6 @@ def main():
         
         # 件数で降順ソート
         distribution = distribution.sort_values("Count", ascending=False)
-        
-        # 【デバッグ用】データ件数の確認
-        if not distribution.empty:
-            max_count = distribution.iloc[0]['Count']
-            st.caption(f"DEBUG info: Top Answer Count (Bar Chart) = {max_count}")
         
         col1, col2 = st.columns([1, 1])
         
