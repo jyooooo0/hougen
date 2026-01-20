@@ -849,6 +849,10 @@ def main():
     # 上位10回答の分布
     distribution = get_question_distribution(df, selected_question)
     
+    # 念のため件数で降順ソート（Pieチャートで上位を正しく取るため）
+    if not distribution.empty:
+        distribution = distribution.sort_values("件数", ascending=False)
+    
     if not distribution.empty:
         col1, col2 = st.columns([1, 1])
         
