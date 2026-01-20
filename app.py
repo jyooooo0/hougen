@@ -649,50 +649,24 @@ def main():
                 tiles="CartoDB dark_matter"  # ダークモード対応タイル
             )
             
-            # 4. GeoJsonレイヤーを追加
-            def style_function(feature):
-                city_name = feature['properties'].get('N03_004', '')
-                fill_color = municipality_colors.get(city_name, '#404050')
-                return {
-                    'fillColor': fill_color,
-                    'color': '#ffffff',  # 境界線は白
-                    'weight': 1.5,
-                    'fillOpacity': 0.75,
-                    'opacity': 0.8
-                }
+            # 4. GeoJsonデータの構築（プロパティ注入）
+            processed_features = []
             
-            def highlight_function(feature):
-                return {
-                    'fillColor': '#4ecdc4',  # ハイライト時はティール色
-                    'color': '#ffffff',
-                    'weight': 3,
-                    'fillOpacity': 0.95,
-                    'opacity': 1.0
-                }
-            
-            # ツールチップ用のデータを準備
-            tooltip_data = {}
-            for _, row in df_map_viz.iterrows():
-                city = row['市町村']
-                tooltip_data[city] = {
-                    'top_ans': row['最も多い方言'],
-                    'top3_str': row['上位回答'],
-                    'total_count': row['総回答数']
-                }
-            
-            # フィーチャーごとにGeoJsonを追加
             for feature in geojson['features']:
                 props = feature['properties']
                 city_name = props.get('N03_004')
                 
-                if not city_name or city_name not in municipality_colors:
+                # 該当なしの場合はスキップまたはデフォルト表示
+                if not city_name:
                     continue
-                
-                # ツールチップの作成
+                    
+                color = municipality_colors.get(city_name, '#404050')
                 tip_info = tooltip_data.get(city_name, {})
+                
+                # ツールチップ/ポップアップHTMLの構築
                 if tip_info:
-                    tooltip_html = f"""
-                    <div style="font-family: sans-serif; font-size: 14px; padding: 5px;">
+                    html_content = f"""
+                    <div style="font-family: sans-serif; font-size: 14px; padding: 5px; min-width: 200px;">
                         <b style="font-size: 16px;">{city_name}</b><br>
                         <hr style="margin: 5px 0; border-color: #ccc;">
                         <b>最多回答:</b> {tip_info.get('top_ans', 'N/A')}<br>
@@ -701,19 +675,40 @@ def main():
                     </div>
                     """
                 else:
-                    tooltip_html = f"<b>{city_name}</b>"
+                    html_content = f"<b>{city_name}</b>"
                 
-                # 個別にGeoJsonレイヤーとして追加
-                folium.GeoJson(
-                    data=feature,
-                    name=city_name,
-                    style_function=style_function,
-                    highlight_function=highlight_function,
-                    popup=folium.Popup(
-                        folium.Html(tooltip_html, script=True),
-                        max_width=250
-                    )
-                ).add_to(m)
+                # プロパティに情報を注入
+                feature['properties']['fillColor'] = color
+                feature['properties']['popup_content'] = html_content
+                processed_features.append(feature)
+            
+            # 更新されたGeoJSONデータ
+            geojson['features'] = processed_features
+            
+            # スタイル関数の定義（プロパティを参照）
+            def style_function(feature):
+                return {
+                    'fillColor': feature['properties'].get('fillColor', '#404050'),
+                    'color': '#ffffff',
+                    'weight': 1.5,
+                    'fillOpacity': 0.75,
+                    'opacity': 0.8
+                }
+            
+            # 単一のGeoJsonレイヤーとして追加
+            folium.GeoJson(
+                data=geojson,
+                name="山形県方言",
+                style_function=style_function,
+                highlight_function=highlight_function,
+                popup=folium.GeoJsonPopup(
+                    fields=['popup_content'],
+                    aliases=[''],
+                    labels=False,
+                    localize=True,
+                    style="max-width: 300px;" # ポップアップのスタイル制限
+                )
+            ).add_to(m)
 
             # Streamlitで表示
             st_folium(m, width=None, height=700)
