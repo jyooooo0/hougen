@@ -775,6 +775,8 @@ def main():
                                 padding: 2px 4px;
                                 border-radius: 4px;
                                 white-space: nowrap;
+                                width: max-content;
+                                display: inline-block;
                                 line-height: 1.2;
                                 text-align: center;
                                 transform: translate(-50%, -50%);
