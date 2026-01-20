@@ -768,11 +768,13 @@ def main():
                         html=f"""
                             <div style="
                                 font-family: 'Noto Sans JP', sans-serif;
-                                font-size: 10pt;
+                                font-size: 8pt;
                                 font-weight: bold;
                                 color: white;
-                                text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px #333, 1px -1px #333, -1px 1px #333;
-                                white-space: nowrap;
+                                text-shadow: 1.5px 0 0 #333, -1.5px 0 0 #333, 0 1.5px 0 #333, 0 -1.5px 0 #333;
+                                white-space: normal;
+                                max-width: 80px;
+                                line-height: 1.1;
                                 text-align: center;
                                 transform: translate(-50%, -50%);
                                 pointer-events: none;
