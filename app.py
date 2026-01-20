@@ -643,9 +643,8 @@ def main():
             
             # 3. Foliumマップの作成（ダークモード対応タイル）
             # 山形県全体が見えるように調整（中心を少し西・南へ、ズームを引く）
-            m = folium.Map(
-                location=[38.5, 140.3], 
-                zoom_start=9,
+                location=[38.35, 140.1], 
+                zoom_start=8,
                 tiles="CartoDB dark_matter"  # ダークモード対応タイル
             )
             
