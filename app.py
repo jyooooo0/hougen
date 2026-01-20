@@ -645,10 +645,20 @@ def main():
             # 山形県全体が見えるように調整（中心を少し西・南へ、ズームを引く）
             m = folium.Map(
                 location=[38.35, 140.1], 
-                zoom_start=8,
+                zoom_start=7.5,
                 tiles="CartoDB dark_matter"  # ダークモード対応タイル
             )
             
+            # ツールチップ用のデータを準備
+            tooltip_data = {}
+            for _, row in df_map_viz.iterrows():
+                city = row['市町村']
+                tooltip_data[city] = {
+                    'top_ans': row['最も多い方言'],
+                    'top3_str': row['上位回答'],
+                    'total_count': row['総回答数']
+                }
+
             # 4. GeoJsonデータの構築（プロパティ注入）
             processed_features = []
             
