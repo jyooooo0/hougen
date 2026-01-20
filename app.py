@@ -774,8 +774,7 @@ def main():
                                 background-color: rgba(0, 0, 0, 0.4);
                                 padding: 2px 4px;
                                 border-radius: 4px;
-                                white-space: normal;
-                                max-width: 120px;
+                                white-space: nowrap;
                                 line-height: 1.2;
                                 text-align: center;
                                 transform: translate(-50%, -50%);

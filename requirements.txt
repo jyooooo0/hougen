@@ -2,7 +2,7 @@ streamlit==1.29.0
 pandas
 plotly
 requests
-folium
+folium==0.16.0
 streamlit-folium==0.18.0
 branca
 shapely
