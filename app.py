@@ -849,46 +849,48 @@ def main():
     # 上位10回答の分布
     distribution = get_question_distribution(df, selected_question)
     
-    # 念のため件数で降順ソート（Pieチャートで上位を正しく取るため）
     if not distribution.empty:
-        distribution = distribution.sort_values("件数", ascending=False)
-    
-    if not distribution.empty:
+        # 【重要】データ型変換とカラム名変更（Plotlyの挙動安定化のため）
+        # 全体に対して適用
+        distribution["件数"] = pd.to_numeric(distribution["件数"], errors='coerce')
+        distribution = distribution.rename(columns={"回答": "Answer", "件数": "Count"})
+        
+        # 件数で降順ソート
+        distribution = distribution.sort_values("Count", ascending=False)
+        
         col1, col2 = st.columns([1, 1])
         
         with col1:
-            # パイチャート
+            # --- パイチャート (graph_objectsを使用) ---
             top_n = 8
             top_dist = distribution.head(top_n).copy()
-            others_count = distribution.iloc[top_n:]["件数"].sum() if len(distribution) > top_n else 0
+            others_count = distribution.iloc[top_n:]["Count"].sum() if len(distribution) > top_n else 0
             
             # その他を追加
             if others_count > 0:
                 top_dist = pd.concat([
                     top_dist,
-                    pd.DataFrame({"回答": ["その他"], "件数": [others_count]})
+                    pd.DataFrame({"Answer": ["その他"], "Count": [others_count]})
                 ], ignore_index=True)
             
-            # 【重要】型変換とカラム名変更（Plotlyの挙動安定化のため）
-            top_dist["件数"] = pd.to_numeric(top_dist["件数"], errors='coerce')
-            top_dist = top_dist.rename(columns={"回答": "Answer", "件数": "Count"})
 
             # 【デバッグ用】（折りたたみ表示）
             with st.expander("詳細データを見る"):
-                st.write("データ型:")
-                st.write(top_dist.dtypes)
                 st.dataframe(top_dist)
-
-            fig_pie = px.pie(
-                top_dist,
-                values="Count",
-                names="Answer",
-                title="回答の割合（上位8件 + その他）",
-                color_discrete_sequence=YAMAGATA_COLORS,
+            
+            import plotly.graph_objects as go
+            
+            fig_pie = go.Figure(data=[go.Pie(
+                labels=top_dist["Answer"],
+                values=top_dist["Count"],
                 hole=0.3,
-            )
-            fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+                marker=dict(colors=YAMAGATA_COLORS),
+                textinfo='percent+label',
+                textposition='inside'
+            )])
+            
             fig_pie.update_layout(
+                title="回答の割合（上位8件 + その他）",
                 showlegend=True,
                 legend=dict(orientation="h", yanchor="bottom", y=-0.3, font=dict(color="#f0f0f5")),
                 margin=dict(t=50, b=80, l=20, r=20),
@@ -899,24 +901,30 @@ def main():
             st.plotly_chart(fig_pie, use_container_width=True)
         
         with col2:
-            # 棒グラフ
-            fig_bar = px.bar(
-                distribution.head(15),
-                x="件数",
-                y="回答",
+            # --- 棒グラフ (graph_objectsを使用) ---
+            bar_data = distribution.head(15)
+            # グラフ上は見やすいように下から積み上げる形にする（降順データの逆順）
+            bar_data_rev = bar_data.iloc[::-1]
+            
+            fig_bar = go.Figure(data=[go.Bar(
+                x=bar_data_rev["Count"],
+                y=bar_data_rev["Answer"],
                 orientation='h',
-                title="回答の件数（上位15件）",
-                color="件数",
-                color_continuous_scale=["#FFB3B3", "#C41E3A"],
-            )
+                marker=dict(
+                    color=bar_data_rev["Count"],
+                    colorscale=["#FFB3B3", "#C41E3A"]
+                )
+            )])
+            
             fig_bar.update_layout(
-                yaxis=dict(categoryorder='total ascending'),
+                title="回答の件数（上位15件）",
                 showlegend=False,
-                coloraxis_showscale=False,
                 margin=dict(t=50, b=20, l=20, r=20),
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
                 font=dict(color="#f0f0f5"),
+                xaxis=dict(title="件数"),
+                yaxis=dict(title="回答")
             )
             st.plotly_chart(fig_bar, use_container_width=True)
     
