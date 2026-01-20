@@ -537,10 +537,24 @@ def main():
     # ======================================
     
     # --- 地図ビジュアライゼーション（メイン） ---
-    st.markdown("""
+    # --- 地図ビジュアライゼーション（メイン） ---
+    st.markdown(f"""
     <div class="section-title">
         <span class="icon">🗺️</span>
         方言分布マップ
+        <span style="
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #e85a6b 0%, #c41e3a 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-left: 1rem;
+            vertical-align: middle;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(232, 90, 107, 0.4);
+        ">
+            Q. {QUESTION_LABELS[selected_question]}
+        </span>
     </div>
     """, unsafe_allow_html=True)
     
@@ -628,8 +642,9 @@ def main():
                 municipality_colors[city] = color
             
             # 3. Foliumマップの作成（ダークモード対応タイル）
+            # 山形県全体が見えるように調整（中心を少し西・南へ、ズームを引く）
             m = folium.Map(
-                location=[38.5, 140.1], 
+                location=[38.5, 140.3], 
                 zoom_start=9,
                 tiles="CartoDB dark_matter"  # ダークモード対応タイル
             )
@@ -694,19 +709,10 @@ def main():
                     name=city_name,
                     style_function=style_function,
                     highlight_function=highlight_function,
-                    tooltip=folium.GeoJsonTooltip(
-                        fields=[],
-                        aliases=[],
-                        localize=True,
-                        sticky=True,
-                        labels=False,
-                        style="""
-                            background-color: white;
-                            border: 2px solid #333;
-                            border-radius: 5px;
-                            box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
-                        """
-                    ) if False else folium.Tooltip(tooltip_html, sticky=True)
+                    popup=folium.Popup(
+                        folium.Html(tooltip_html, script=True),
+                        max_width=250
+                    )
                 ).add_to(m)
 
             # Streamlitで表示
