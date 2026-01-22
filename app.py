@@ -1077,68 +1077,134 @@ def main():
     st.markdown("---")
     
     # ======================================
-    # 方言分析・解説セクション
+    # 方言分析・解説セクション（学術知見に基づく詳細分析）
     # ======================================
     st.markdown('''
     <div class="section-title">
         <span class="icon">📚</span>
-        山形の方言、なぜこんなに違うの？
+        山形県方言の深層分析
     </div>
     ''', unsafe_allow_html=True)
     
-    # 解説コンテンツ
-    col_left, col_right = st.columns([1, 1])
+    # --- セクション1: 二大方言圏の対立 ---
+    st.markdown('''
+    <div class="glass-card">
+        <h4 style="color: #e85a6b; margin-top: 0;">🏔️ 奥羽山脈が生んだ「二つの言葉」</h4>
+        <p style="line-height: 1.8;">
+            山形県の方言は、一般に「山形弁」と一括りにされますが、専門的な方言学では
+            <b>「南奥羽方言」（内陸部）</b>と<b>「北奥羽方言」（庄内地方）</b>という
+            <b>根本的に異なる二つの言語体系</b>が衝突する地点として知られています。
+        </p>
+        <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem;">
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.03);">
+                <th style="padding: 0.7rem; text-align: left;">特徴</th>
+                <th style="padding: 0.7rem; text-align: center; color: #4ecdc4;">庄内地方（北奥羽方言）</th>
+                <th style="padding: 0.7rem; text-align: center; color: #e85a6b;">内陸部（南奥羽方言）</th>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 0.7rem;"><b>アクセント</b></td>
+                <td style="padding: 0.7rem; text-align: center;">✅ 有アクセント（東京式に近い）</td>
+                <td style="padding: 0.7rem; text-align: center;">❌ 無アクセント（崩壊アクセント）</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 0.7rem;"><b>推量表現</b></td>
+                <td style="padding: 0.7rem; text-align: center;">「〜ウ」「〜ヨウ」（行ごう）</td>
+                <td style="padding: 0.7rem; text-align: center;">「〜ベ」（行ぐべ）</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 0.7rem;"><b>否定表現</b></td>
+                <td style="padding: 0.7rem; text-align: center;">「〜ネァ」</td>
+                <td style="padding: 0.7rem; text-align: center;">「〜ンネ」「〜ネ」</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <td style="padding: 0.7rem;"><b>音の特徴</b></td>
+                <td style="padding: 0.7rem; text-align: center;">入り渡り鼻音（マンド）</td>
+                <td style="padding: 0.7rem; text-align: center;">中舌母音（ズーズー弁）</td>
+            </tr>
+            <tr>
+                <td style="padding: 0.7rem;"><b>文化圏</b></td>
+                <td style="padding: 0.7rem; text-align: center;">日本海側・北前船交易</td>
+                <td style="padding: 0.7rem; text-align: center;">宮城・福島との連続性</td>
+            </tr>
+        </table>
+        <p style="line-height: 1.8; color: #a0a0b0; font-size: 0.9rem;">
+            ※ この対立は単なる語彙の違いではなく、言語としての根本的な構造の違いです。
+            庄内の人と内陸の人が会話すると、最も違和感を感じるのはこのアクセントの有無だと言われています。
+        </p>
+    </div>
+    ''', unsafe_allow_html=True)
     
-    with col_left:
+    # --- セクション2: 音韻分析 ---
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
         st.markdown('''
         <div class="glass-card">
-            <h4 style="color: #e85a6b; margin-top: 0;">🏔️ 山が方言を分けた</h4>
+            <h4 style="color: #4ecdc4; margin-top: 0;">🔊 「ズーズー弁」と「ジージー弁」</h4>
             <p style="line-height: 1.8;">
-                山形県の方言が地域によって大きく違う最大の理由は<b>「出羽山地」</b>です。
-                月山や朝日連峰が壁となって、庄内地方と内陸部を分断してきました。
+                東北方言は「ズーズー弁」と総称されますが、実は山形県内でも音が異なります。
             </p>
-            <p style="line-height: 1.8;">
-                昔は山を越えるのが大変だったので、庄内は日本海側の文化、
-                内陸は他の東北地方の文化とつながりながら、それぞれ独自の言葉が育ちました。
-            </p>
+            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                <p style="margin: 0 0 0.5rem 0;"><b>内陸部：中舌化（ズーズー弁）</b></p>
+                <ul style="margin: 0; padding-left: 1.5rem; color: #a0a0b0;">
+                    <li>「イ」と「ウ」が口の真ん中で発音される</li>
+                    <li>「シ」と「ス」、「チ」と「ツ」の区別が曖昧に</li>
+                </ul>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+                <p style="margin: 0 0 0.5rem 0;"><b>庄内：前舌化（ジージー弁）</b></p>
+                <ul style="margin: 0; padding-left: 1.5rem; color: #a0a0b0;">
+                    <li>「ウ」が「イ」に近い音になる</li>
+                    <li>「ナス（茄子）」が「ナシ」に近く聞こえる</li>
+                </ul>
+            </div>
         </div>
         ''', unsafe_allow_html=True)
         
         st.markdown('''
         <div class="glass-card">
-            <h4 style="color: #4ecdc4; margin-top: 0;">❄️ 雪ことばの豊かさ</h4>
+            <h4 style="color: #ff8fa3; margin-top: 0;">👂 庄内特有の「入り渡り鼻音」</h4>
             <p style="line-height: 1.8;">
-                「雪かき」だけでも<b>「雪はき」「雪ほり」「雪よせ」</b>など、
-                地域によって呼び方が違います。
+                庄内方言には、有声音の前に鼻音が挿入される珍しい特徴があります。
+                これは古代日本語に存在した発音が現代まで残っているもので、言語学的に貴重な特徴です。
             </p>
-            <p style="line-height: 1.8;">
-                <b>はき</b>＝掃く（軽い雪）、<b>ほり</b>＝掘る（どっさり積もった雪）、
-                <b>よせ</b>＝寄せる（移動させる）。
-                雪国ならではの細やかな表現の違いですね。
-            </p>
+            <table style="width: 100%; margin: 1rem 0; font-size: 0.9rem;">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem;">窓（まど）</td>
+                    <td style="padding: 0.5rem;">→ <b style="color: #4ecdc4;">マンド</b></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem;">在郷（ざいごう）</td>
+                    <td style="padding: 0.5rem;">→ <b style="color: #4ecdc4;">ゼァンゴ</b></td>
+                </tr>
+                <tr>
+                    <td style="padding: 0.5rem;">誰（だれ）</td>
+                    <td style="padding: 0.5rem;">→ <b style="color: #4ecdc4;">ダンレ</b></td>
+                </tr>
+            </table>
         </div>
         ''', unsafe_allow_html=True)
     
-    with col_right:
+    with col2:
         st.markdown('''
         <div class="glass-card">
-            <h4 style="color: #ff8fa3; margin-top: 0;">🌏 4つの方言圏</h4>
-            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+            <h4 style="color: #ffd700; margin-top: 0;">🎵 融合母音「エァ」の世界</h4>
+            <p style="line-height: 1.8;">
+                庄内方言では、2つの母音が1つに融合して独特の音が生まれます。
+                「ア」と「エ」の中間のような、文字では表現しにくい音色です。
+            </p>
+            <table style="width: 100%; margin: 1rem 0; font-size: 0.9rem;">
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <td style="padding: 0.5rem; color: #e85a6b;"><b>庄内</b></td>
-                    <td style="padding: 0.5rem;">鶴岡・酒田など。西日本に近いアクセント</td>
+                    <td style="padding: 0.5rem; color: #a0a0b0;">ai →</td>
+                    <td style="padding: 0.5rem;">大根 → <b style="color: #ffd700;">デァコ</b></td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <td style="padding: 0.5rem; color: #4ecdc4;"><b>最上</b></td>
-                    <td style="padding: 0.5rem;">新庄周辺。庄内と内陸の中間的な特徴</td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <td style="padding: 0.5rem; color: #ffd700;"><b>村山</b></td>
-                    <td style="padding: 0.5rem;">山形市など。典型的な東北弁</td>
+                    <td style="padding: 0.5rem; color: #a0a0b0;">ae →</td>
+                    <td style="padding: 0.5rem;">前垂れ → <b style="color: #ffd700;">メァンダリ</b></td>
                 </tr>
                 <tr>
-                    <td style="padding: 0.5rem; color: #91B493;"><b>置賜</b></td>
-                    <td style="padding: 0.5rem;">米沢など。福島との接点あり</td>
+                    <td style="padding: 0.5rem; color: #a0a0b0;">oi →</td>
+                    <td style="padding: 0.5rem;">白い → <b style="color: #ffd700;">シレァ</b></td>
                 </tr>
             </table>
         </div>
@@ -1146,41 +1212,139 @@ def main():
         
         st.markdown('''
         <div class="glass-card">
-            <h4 style="color: #ffd700; margin-top: 0;">🗣️ 語尾の違い</h4>
-            <p style="line-height: 1.8;">
-                庄内では「〜のー」、内陸では「〜ずー」が多いと言われています。
-            </p>
-            <p style="line-height: 1.8;">
-                同じ県内でも語尾だけで出身地がわかることも。
-                「どこ出身？」って話題になることもありますね。
-            </p>
+            <h4 style="color: #91B493; margin-top: 0;">🌏 4つの方言圏</h4>
+            <table style="width: 100%; border-collapse: collapse; margin: 0.5rem 0;">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem; color: #4ecdc4; width: 25%;"><b>庄内</b></td>
+                    <td style="padding: 0.5rem; font-size: 0.9rem;">鶴岡・酒田。北奥羽方言。北前船で上方文化が流入</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem; color: #e85a6b;"><b>最上</b></td>
+                    <td style="padding: 0.5rem; font-size: 0.9rem;">新庄周辺。庄内と内陸の「遷移地帯」</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem; color: #ffd700;"><b>村山</b></td>
+                    <td style="padding: 0.5rem; font-size: 0.9rem;">山形市など。南奥羽方言の中核</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0.5rem; color: #ff8fa3;"><b>置賜</b></td>
+                    <td style="padding: 0.5rem; font-size: 0.9rem;">米沢。上杉藩文化。「おしょうしな」の地</td>
+                </tr>
+            </table>
         </div>
         ''', unsafe_allow_html=True)
     
-    # 豆知識
+    # --- セクション3: 感謝表現の深層分析 ---
     st.markdown('''
     <div class="glass-card" style="margin-top: 1rem;">
-        <h4 style="color: #e85a6b; margin-top: 0;">💡 方言トリビア</h4>
+        <h4 style="color: #e85a6b; margin-top: 0;">🙏 「ありがとう」の深い世界</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            <div style="flex: 1; min-width: 280px; padding: 1rem; background: rgba(78, 205, 196, 0.1); border-radius: 8px; border-left: 3px solid #4ecdc4;">
+                <p style="margin: 0; font-size: 1.2rem;"><b>もっけだの</b>（庄内）</p>
+                <p style="margin: 0.5rem 0 0 0; color: #a0a0b0; font-size: 0.9rem; line-height: 1.6;">
+                    庄内を代表する感謝表現。「もっけ」は「勿怪（もっけ）＝思いがけないこと」から。
+                    「思いがけなくありがたい」という深い感謝のニュアンスを持つ。
+                </p>
+            </div>
+            <div style="flex: 1; min-width: 280px; padding: 1rem; background: rgba(232, 90, 107, 0.1); border-radius: 8px; border-left: 3px solid #e85a6b;">
+                <p style="margin: 0; font-size: 1.2rem;"><b>おしょうしな</b>（置賜）</p>
+                <p style="margin: 0.5rem 0 0 0; color: #a0a0b0; font-size: 0.9rem; line-height: 1.6;">
+                    米沢地方を代表する感謝表現。語源は「笑止（しょうし）」で、「これほど良くしていただいて
+                    気恥ずかしい・申し訳ない」という、相手の負担を慮る<b>謙遜の心</b>が込められている。
+                    単なる「ありがとう」以上の、日本的な配慮の表現。
+                </p>
+            </div>
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
+    
+    # --- セクション4: 鶴岡調査 ---
+    st.markdown('''
+    <div class="glass-card" style="margin-top: 1rem;">
+        <h4 style="color: #ffd700; margin-top: 0;">📊 鶴岡調査：70年以上続く世界的研究</h4>
+        <p style="line-height: 1.8;">
+            国立国語研究所は、1950年から約20年ごとに鶴岡市で大規模な方言調査を実施しています（1950年、1971年、1991年、2011年）。
+            同じ地域で同じ方法で半世紀以上追跡した例は<b>世界でも稀有</b>であり、社会言語学の金字塔とされています。
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+            <div style="flex: 1; min-width: 200px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; text-align: center;">
+                <p style="margin: 0; font-size: 2rem; color: #4ecdc4;">📈</p>
+                <p style="margin: 0.5rem 0 0 0;"><b>S字カーブ</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">
+                    共通語化は最初ゆっくり、途中で急激に、最後にまたゆっくり進む
+                </p>
+            </div>
+            <div style="flex: 1; min-width: 200px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; text-align: center;">
+                <p style="margin: 0; font-size: 2rem; color: #e85a6b;">🔄</p>
+                <p style="margin: 0.5rem 0 0 0;"><b>アクセントは変わる</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">
+                    大人になっても話し方のメロディは変化し続ける
+                </p>
+            </div>
+            <div style="flex: 1; min-width: 200px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; text-align: center;">
+                <p style="margin: 0; font-size: 2rem; color: #ff8fa3;">🔒</p>
+                <p style="margin: 0.5rem 0 0 0;"><b>発音は固定</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">
+                    発音の癖（訛り）は子ども時代に決まり、ほとんど変わらない
+                </p>
+            </div>
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
+    
+    # --- セクション5: 雪ことば・生活語 ---
+    st.markdown('''
+    <div class="glass-card" style="margin-top: 1rem;">
+        <h4 style="color: #4ecdc4; margin-top: 0;">❄️ 雪国の言葉の豊かさ</h4>
+        <p style="line-height: 1.8;">
+            「雪かき」一つとっても、地域や状況によって言い方が変わります。
+            これは雪国ならではの<b>生活に根ざした言葉の細やかさ</b>です。
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+            <div style="flex: 1; min-width: 150px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <p style="margin: 0; font-size: 1.1rem;"><b>雪はき</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">軽い雪を「掃く」イメージ</p>
+            </div>
+            <div style="flex: 1; min-width: 150px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <p style="margin: 0; font-size: 1.1rem;"><b>雪ほり</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">どっさり積もった雪を「掘る」</p>
+            </div>
+            <div style="flex: 1; min-width: 150px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <p style="margin: 0; font-size: 1.1rem;"><b>雪よせ</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">雪を「寄せる」・移動させる</p>
+            </div>
+            <div style="flex: 1; min-width: 150px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                <p style="margin: 0; font-size: 1.1rem;"><b>雪ながし</b></p>
+                <p style="margin: 0.3rem 0 0 0; color: #a0a0b0; font-size: 0.85rem;">水路で雪を「流す」</p>
+            </div>
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
+    
+    # --- セクション6: 方言トリビア ---
+    st.markdown('''
+    <div class="glass-card" style="margin-top: 1rem;">
+        <h4 style="color: #ff8fa3; margin-top: 0;">💡 方言トリビア</h4>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
             <div style="flex: 1; min-width: 250px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                <p style="margin: 0;"><b>「はっこい」と「しゃっこい」</b></p>
+                <p style="margin: 0;"><b>「はっこい」「しゃっこい」</b></p>
                 <p style="margin: 0.5rem 0 0 0; color: #a0a0b0; font-size: 0.9rem;">
-                    「冷たい」の方言。実は古語「つめたし」が変化したもの。
-                    t音がh音やsh音に弱くなる東北方言の特徴です。
+                    「冷たい」の方言。「つめたし」のt音がh音やsh音に弱まる東北方言の特徴。
+                    県内広域で使われる代表的な方言。
                 </p>
             </div>
             <div style="flex: 1; min-width: 250px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                <p style="margin: 0;"><b>語尾の「のー」と「ずー」</b></p>
+                <p style="margin: 0;"><b>庄内に残る「京言葉」</b></p>
                 <p style="margin: 0.5rem 0 0 0; color: #a0a0b0; font-size: 0.9rem;">
-                    庄内では「〜のー」、内陸では「〜ずー」が多い傾向。
-                    同じ県でも語尾で出身地がわかることも！
+                    北前船の交易により、庄内には関西由来の言葉が残っています。
+                    「ボンボ（男の子）」「サゲ（酒の肴）」などが代表例。
                 </p>
             </div>
             <div style="flex: 1; min-width: 250px; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                <p style="margin: 0;"><b>若い世代の標準語化</b></p>
+                <p style="margin: 0;"><b>格助詞「〜サ」の由来</b></p>
                 <p style="margin: 0.5rem 0 0 0; color: #a0a0b0; font-size: 0.9rem;">
-                    都市部を中心に標準語化が進んでいますが、
-                    庄内地方は比較的方言が残っています。
+                    「学校サ行ぐ（学校に行く）」の「サ」は、「〜様（さま）」が文法化したもの。
+                    東北方言を象徴する表現の一つ。
                 </p>
             </div>
         </div>
