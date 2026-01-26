@@ -71,7 +71,23 @@ def load_data(url: str = SPREADSHEET_URL) -> pd.DataFrame:
             raise KeyError("'現在お住まいの場所' カラムが見つかりません")
         
         # 市町村名の名寄せ
-        df["市町村名"] = df["現在お住まいの場所"].apply(extract_municipality)
+        def determine_municipality(row):
+            # 1. 現在の居住地から判定
+            current = row.get("現在お住まいの場所", "")
+            muni = extract_municipality(current)
+            if muni != "県外/不明":
+                return muni
+            
+            # 2. ルーツから判定（Fallback）
+            roots = row.get("ルーツ", "")
+            muni_roots = extract_municipality(roots)
+            if muni_roots != "県外/不明":
+                return muni_roots
+            
+            # 3. それでもダメなら県外/不明
+            return "県外/不明"
+
+        df["市町村名"] = df.apply(determine_municipality, axis=1)
         
         # 緯度経度の追加
         df["緯度"] = df["市町村名"].apply(lambda x: get_coordinates(x)[0])

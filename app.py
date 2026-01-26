@@ -508,6 +508,7 @@ def main():
         
         unique_municipalities = df[df["市町村名"] != "県外/不明"]["市町村名"].nunique()
         st.metric("回答のあった市町村", f"{unique_municipalities}箇所")
+        st.caption("※県外在住の方も「ルーツ」情報から可能な限り地図に反映しています")
         
         st.markdown("---")
         
