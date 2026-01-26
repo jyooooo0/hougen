@@ -610,9 +610,13 @@ def main():
         df_map_viz = pd.DataFrame(map_data)
         
         # 座標情報を追加（ラベル表示用）
-        # 明示的にfloat型に変換
-        df_map_viz["緯度"] = df_map_viz["市町村"].apply(lambda x: get_coordinates(x)[0]).astype(float)
-        df_map_viz["経度"] = df_map_viz["市町村"].apply(lambda x: get_coordinates(x)[1]).astype(float)
+        # 緯度経度が取得できない（Noneの）場合はその行を除外
+        coords_mask = df_map_viz["市町村"].apply(lambda x: get_coordinates(x)[0] is not None)
+        df_map_viz = df_map_viz[coords_mask].copy()
+        
+        if not df_map_viz.empty:
+            df_map_viz["緯度"] = df_map_viz["市町村"].apply(lambda x: get_coordinates(x)[0]).astype(float)
+            df_map_viz["経度"] = df_map_viz["市町村"].apply(lambda x: get_coordinates(x)[1]).astype(float)
         
         if not df_map_viz.empty and geojson:
             # --- Folium マップの実装（ダークモード対応）---

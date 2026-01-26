@@ -60,6 +60,29 @@ REGIONS = {
     "庄内": ["鶴岡市", "酒田市", "三川町", "庄内町", "遊佐町"],
 }
 
+# 平仮名から漢字への変換マップ
+HIRAGANA_TO_KANJI = {
+    # 村山
+    "やまがたし": "山形市", "さがえし": "寒河江市", "かみのやまし": "上山市",
+    "むらやまし": "村山市", "てんどうし": "天童市", "ひがしねし": "東根市",
+    "おばなざわし": "尾花沢市", "のべざわし": "尾花沢市", # 念のため
+    "やまのべまち": "山辺町", "なかやままち": "中山町", "かほくちょう": "河北町",
+    "にしかわまち": "西川町", "あさひまち": "朝日町", "おおえまち": "大江町",
+    
+    # 最上
+    "しんじょうし": "新庄市", "かねやままち": "金山町", "もがみまち": "最上町",
+    "ふながたまち": "舟形町", "まむろがわまち": "真室川町", "おおくらむら": "大蔵村",
+    "さけがわむら": "鮭川村", "とざわむら": "戸沢村",
+    
+    # 置賜
+    "よねざわし": "米沢市", "ながいし": "長井市", "なんようし": "南陽市",
+    "たかはたまち": "高畠町", "かわにしまち": "川西町", "おぐにまち": "小国町",
+    "しらたかまち": "白鷹町", "いいでまち": "飯豊町",
+    
+    # 庄内
+    "つるおかし": "鶴岡市", "さかたし": "酒田市", "みかわまち": "三川町",
+    "しょうないまち": "庄内町", "ゆざまち": "遊佐町"
+}
 
 def extract_municipality(location_text: str) -> str:
     """
@@ -73,11 +96,18 @@ def extract_municipality(location_text: str) -> str:
     """
     if not location_text or not isinstance(location_text, str):
         return "県外/不明"
-    
-    # まず長い市町村名からマッチを試みる（例：「庄内町」は「庄内」より先にマッチ）
+        
+    # 平仮名の正規化（長音等はそのまま）
+    # まず長い市町村名（漢字）からマッチを試みる
     for municipality in MUNICIPALITY_NAMES:
         if municipality in location_text:
             return municipality
+            
+    # 平仮名での完全一致または部分一致チェック
+    # "やまがたし" などが含まれているかをチェック
+    for hira, kanji in HIRAGANA_TO_KANJI.items():
+        if hira in location_text:
+            return kanji
     
     # 旧地域名から現在の市町村への変換
     old_name_mapping = {
@@ -161,6 +191,8 @@ if __name__ == "__main__":
         "山形市南原町",
         "越沢",
         "藤島",
+        "やまがたし",
+        "つるおかし",
         "",
         None,
     ]
@@ -168,4 +200,4 @@ if __name__ == "__main__":
     print("名寄せテスト結果:")
     for test in test_cases:
         result = extract_municipality(test)
-        print(f"  {test!r} → {result}")
+        print(f"  {test!r} -> {result}")
