@@ -1356,48 +1356,48 @@ def main():
     
     # --- セクション7: 参考文献・リンク集（出典明記） ---
     st.markdown('''
-    <div class="glass-card" style="margin-top: 1rem;">
-        <h4 style="color: #91B493; margin-top: 0;">📚 参考文献・リンク集</h4>
-        <p style="line-height: 1.8; color: #a0a0b0; margin-bottom: 1rem;">
-            本セクションの解説は、以下の学術資料・データベースを参考にしています。
-        </p>
-        
-        <div style="margin-bottom: 1.5rem;">
-            <p style="margin: 0 0 0.5rem 0; color: #4ecdc4;"><b>🏛️ 学術機関・データベース</b></p>
-            <ul style="margin: 0; padding-left: 1.5rem; line-height: 2;">
-                <li><a href="https://mmsrv.ninjal.ac.jp/tsuruoka/" target="_blank" style="color: #ffd700; text-decoration: none;">鶴岡調査データベース</a> - 国立国語研究所による70年以上の縦断調査</li>
-                <li><a href="https://www.ninjal.ac.jp/" target="_blank" style="color: #ffd700; text-decoration: none;">国立国語研究所</a> - 日本語研究の中核機関</li>
-                <li><a href="https://www.tr.yamagata-u.ac.jp/kotobunken/" target="_blank" style="color: #ffd700; text-decoration: none;">山形県ことばと文化研究会</a> - 山形大学人文社会科学部（旧：山形県方言研究会）</li>
-            </ul>
-        </div>
-        
-        <div style="margin-bottom: 1.5rem;">
-            <p style="margin: 0 0 0.5rem 0; color: #e85a6b;"><b>📖 主要文献・辞典</b></p>
-            <ul style="margin: 0; padding-left: 1.5rem; line-height: 2; color: #c0c0d0;">
-                <li>『山形県方言辞典』（1970年） - 山形県方言研究会編</li>
-                <li>『庄内方言辞典』 - 佐藤雪雄 著</li>
-                <li>『山形県のことば』（日本のことばシリーズ 6） - 遠藤仁 著</li>
-                <li>『鶴岡方言の記述的研究』 - 国立国語研究所</li>
-                <li>井上史雄「東北方言の変遷」 - 東京大学博士論文（庄内方言の歴史的変遷研究）</li>
-                <li>『日本のふるさと言葉集成 第3巻』 - 国立国語研究所 全国方言談話データベース</li>
-            </ul>
-        </div>
-        
-        <div style="margin-bottom: 1rem;">
-            <p style="margin: 0 0 0.5rem 0; color: #ff8fa3;"><b>🔗 Wikipedia記事（入門向け）</b></p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <a href="https://ja.wikipedia.org/wiki/庄内弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">庄内方言</a>
-                <a href="https://ja.wikipedia.org/wiki/置賜弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">置賜方言</a>
-                <a href="https://ja.wikipedia.org/wiki/山形弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">山形弁</a>
-                <a href="https://ja.wikipedia.org/wiki/村山弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">村山方言</a>
-                <a href="https://ja.wikipedia.org/wiki/最上弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">最上方言</a>
-            </div>
-        </div>
-        
-        <p style="margin-top: 1rem; color: #707080; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-            ※ 外部リンクは新しいタブで開きます。リンク先の内容は各サイトの運営者に帰属します。
-        </p>
+<div class="glass-card" style="margin-top: 1rem;">
+    <h4 style="color: #91B493; margin-top: 0;">📚 参考文献・リンク集</h4>
+    <p style="line-height: 1.8; color: #a0a0b0; margin-bottom: 1rem;">
+        本セクションの解説は、以下の学術資料・データベースを参考にしています。
+    </p>
+    
+    <div style="margin-bottom: 1.5rem;">
+        <p style="margin: 0 0 0.5rem 0; color: #4ecdc4;"><b>🏛️ 学術機関・データベース</b></p>
+        <ul style="margin: 0; padding-left: 1.5rem; line-height: 2;">
+            <li><a href="https://mmsrv.ninjal.ac.jp/tsuruoka/" target="_blank" style="color: #ffd700; text-decoration: none;">鶴岡調査データベース</a> - 国立国語研究所による70年以上の縦断調査</li>
+            <li><a href="https://www.ninjal.ac.jp/" target="_blank" style="color: #ffd700; text-decoration: none;">国立国語研究所</a> - 日本語研究の中核機関</li>
+            <li><a href="https://www.tr.yamagata-u.ac.jp/kotobunken/" target="_blank" style="color: #ffd700; text-decoration: none;">山形県ことばと文化研究会</a> - 山形大学人文社会科学部（旧：山形県方言研究会）</li>
+        </ul>
     </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+        <p style="margin: 0 0 0.5rem 0; color: #e85a6b;"><b>📖 主要文献・辞典</b></p>
+        <ul style="margin: 0; padding-left: 1.5rem; line-height: 2; color: #c0c0d0;">
+            <li>『山形県方言辞典』（1970年） - 山形県方言研究会編</li>
+            <li>『庄内方言辞典』 - 佐藤雪雄 著</li>
+            <li>『山形県のことば』（日本のことばシリーズ 6） - 遠藤仁 著</li>
+            <li>『鶴岡方言の記述的研究』 - 国立国語研究所</li>
+            <li>井上史雄「東北方言の変遷」 - 東京大学博士論文（庄内方言の歴史的変遷研究）</li>
+            <li>『日本のふるさと言葉集成 第3巻』 - 国立国語研究所 全国方言談話データベース</li>
+        </ul>
+    </div>
+    
+    <div style="margin-bottom: 1rem;">
+        <p style="margin: 0 0 0.5rem 0; color: #ff8fa3;"><b>🔗 Wikipedia記事（入門向け）</b></p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <a href="https://ja.wikipedia.org/wiki/庄内弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">庄内方言</a>
+            <a href="https://ja.wikipedia.org/wiki/置賜弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">置賜方言</a>
+            <a href="https://ja.wikipedia.org/wiki/山形弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">山形弁</a>
+            <a href="https://ja.wikipedia.org/wiki/村山弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">村山方言</a>
+            <a href="https://ja.wikipedia.org/wiki/最上弁" target="_blank" style="background: rgba(255,255,255,0.05); padding: 0.4rem 0.8rem; border-radius: 4px; color: #ffd700; text-decoration: none; font-size: 0.9rem;">最上方言</a>
+        </div>
+    </div>
+    
+    <p style="margin-top: 1rem; color: #707080; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+        ※ 外部リンクは新しいタブで開きます。リンク先の内容は各サイトの運営者に帰属します。
+    </p>
+</div>
     ''', unsafe_allow_html=True)
     
     # フッター
